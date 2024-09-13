@@ -1,4 +1,4 @@
-name: DigitalOcean Container Registry Remove With Garbage Collection
+name: DigitalOcean Container Registry Remove With Optional Garbage Collection
 description: Remove old images from Digital Ocean's Container Registry
 branding:
   icon: 'trash'
@@ -16,10 +16,13 @@ inputs:
     description: Tag regex to exclude. Example - ^(latest|tag1|tag2)$
     required: false
     default: ''
+  perform_gc: 
+    description: 'Boolean to Perform Garbage collection'
+    required: false
 
 runs:
   using: composite
   steps:
     - name: Remove images older than the last n versions
       shell: bash
-      run: ${{ github.action_path }}/remove_images.sh ${{ inputs.image_repository }} ${{ inputs.buffer_size }} '${{ inputs.exclude }}'
+      run: ${{ github.action_path }}/remove_images.sh ${{ inputs.image_repository }} ${{ inputs.buffer_size }} ${{ inputs.perform_gc }} '${{ inputs.exclude }}'
