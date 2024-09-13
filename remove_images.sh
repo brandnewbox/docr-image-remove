@@ -4,9 +4,3 @@ for DIGEST in $DIGESTS; do
 done
 echo Manifest Digests removed: $DIGESTS
 
-# Start garbage collection if perform_gc is true
-if [ "$3" = true ]; then
-    doctl registry garbage-collection start --include-untagged-manifests --force
-else
-    echo "Garbage collection is skipped."
-fi
