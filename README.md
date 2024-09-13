@@ -3,7 +3,6 @@ This action uses [doctl](https://github.com/digitalocean/action-doctl) to find a
 
 1) Gets the repository manifests using `doctl registry repository lm` and orders them by the `UpdatedAt` attribute. By default it will ignore the 10 most recent images 
 2) Then deletes the older images using `doctl registry repository delete-manifest`
-3) Lastly triggers garbage collection to reclaim space in the registry
 
 PRs are welcome.
 
@@ -17,7 +16,7 @@ Add this step to a job to automatically delete older images as part of a job:
       with:
         token: ${{ secrets.DIGITALOCEAN_API_KEY }}
     - name: Remove old images from Container Registry
-      uses: henrik242/docr-image-remove@v1
+      uses: brandnewbox/docr-image-remove@v1
       with:
         image_repository: image-repository # required
         buffer_size: 10
